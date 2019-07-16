@@ -1,6 +1,8 @@
 # PHASE 2
 def convert_to_int(str)
   Integer(str)
+  rescue ArgumentError
+    nil
 end
 
 # PHASE 3
@@ -12,7 +14,17 @@ def reaction(maybe_fruit)
   else 
     raise StandardError 
   end 
+rescue StandardError
+  if maybe_fruit == "coffee"
+    puts " This is not a fruit, try again :)"
+    maybe_fruit = gets.chomp
+    retry 
+  else
+    raise NotFruitError.new "This is not a fruit"
+  end
 end
+
+class NotFruitError < StandardError; end
 
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
@@ -28,6 +40,11 @@ class BestFriend
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
+
+    raise "WE ARE NOT BESTFRIENDS YET!" if yrs_known < 5
+    raise "I don't know your name" if name.length <= 0
+    raise "You don't do anything!" if fav_pastime.length <= 0
+      
   end
 
   def talk_about_friendship
@@ -42,5 +59,6 @@ class BestFriend
     puts "Hey bestie, I made you a friendship bracelet. It says my name, #{@name}, so you never forget me." 
   end
 end
+
 
 
