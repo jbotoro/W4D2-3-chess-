@@ -21,7 +21,9 @@ class Board
 
   def valid_pos?(pos)
     row, col = pos
-    return true if row.between?(0, 7) && col.between?(0, 7)
+    if row.between?(0, 7) && col.between?(0, 7)
+      return true 
+    end
     false
   end
 
@@ -30,28 +32,75 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise "no piece here" if self[start_pos].nil?
-    raise "not valid move" unless valid_pos?(end_pos)
-    # still need to check if the piece's color to see if valid
+    raise "you have no piece here" if self[start_pos].nil?
+    raise "This position is not on the board" unless valid_pos?(end_pos)
+    raise "You already have a peice here" if self[start_pos].color == self[end_pos].color
 
     self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
   end
 
 
   def set_board
-    rows.each_with_index do |row, idx|
-      if idx.between?(2,5)
+    rows.each_with_index do |row, idx_1|
+      if idx_1.between?(2,5)
         row.map! { |ele| ele = nil }
-      else
-        row.map! { |ele| ele = 'a' } #Piece.new }
+      elsif idx_1 == 0 || idx_1 == 7
+        row.each_with_index do |col, idx_2|
+          if idx_1 == 0
+            piece = self[[idx_1, idx_2]]
+            case idx_2
+            when 0
+              piece = Rook.new(:B, self, [idx_1,idx_2])
+            when 1
+              piece = Knight.new(:B, self, [idx_1,idx_2])
+            when 2
+              piece = Bishop.new(:B, self, [idx_1,idx_2])
+            when 3 
+              piece = Queen.new(:B, self, [idx_1,idx_2])
+            when 4
+              piece = King.new(:B, self, [idx_1,idx_2])
+            when 5
+              piece = Bishop.new(:B, self, [idx_1,idx_2])
+            when 6
+              piece = Knight.new(:B, self, [idx_1,idx_2])
+            when 7
+              piece = Rook.new(:B, self, [idx_1,idx_2])
+            
+            end
+          else
+            piece = self[idx_1, idx_2]
+            case idx_2
+            when 0
+              piece = Rook.new(:W, self, [idx_1,idx_2])
+            when 1
+              piece = Knight.new(:W, self, [idx_1,idx_2])
+            when 2
+              piece = Bishop.new(:W, self, [idx_1,idx_2])
+            when 3 
+              piece = Queen.new(:W, self, [idx_1,idx_2])
+            when 4
+              piece = King.new(:W, self, [idx_1,idx_2])
+            when 5
+              piece = Bishop.new(:W, self, [idx_1,idx_2])
+            when 6
+              piece = Knight.new(:W, self, [idx_1,idx_2])
+            when 7
+              piece = Rook.new(:W, self, [idx_1,idx_2])
+            end
+          end
+        end
+      elsif idx_1 == 1 || idx_1 == 6
+        if idx_1 == 1
+          row.map!.with_index { |ele, idx_2| ele = Pawn.new('black', self, self[idx_1, idx_2]) }
+        else
+          row.map!.with_index { |ele, idx_2| ele = Pawn.new('white', self, self[idx_1, idx_2]) }
+        end
       end
     end
   end
 
   def render
-    @rows.each do |row|
-      p row
-    end
+    @rows.each { |row| p row }
   end
 
 end

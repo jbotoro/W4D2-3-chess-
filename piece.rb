@@ -14,8 +14,12 @@ class Piece
     possible_moves = []
   end
 
+  def symbol
+    puts "#{color} #{self.class.name}"
+  end
+
   def to_s
-    self.
+    self.symbol
   end
 
   def empty?
