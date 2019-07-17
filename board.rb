@@ -38,7 +38,7 @@ class Board
     raise "This position is not on the board" unless valid_pos?(end_pos)
     raise "You already have a peice here" if self[start_pos].color == self[end_pos].color
 
-    self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+    self[start_pos], self[end_pos] = sentinel, self[start_pos]
   end
 
 
@@ -102,7 +102,7 @@ class Board
 
   def render
     system "clear"
-    @rows.each { |row| p row } #puts "#{row.join(' ')}" }
+    @rows.each { |row| p row }
   end
 
 end
