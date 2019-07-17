@@ -1,12 +1,14 @@
 module Stepable
 
   def moves
-  end
+    # should call self.move_diffs
 
+  end
+  
   private
 
   def move_diffs
 
   end
-  
+
 end
