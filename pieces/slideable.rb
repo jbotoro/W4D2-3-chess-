@@ -3,16 +3,16 @@ module Slideable
   private
 
   HORIZONTAL_DIRS = [
-    up = [-1, 0]
-    down = [1,0]
-    left = [0, -1]
+    up = [-1, 0],
+    down = [1,0],
+    left = [0, -1],
     right = [0, 1]
   ]
 
   DIAG_DIRS = [
-    up_r = [-1, 1]
-    up_l = [-1, -1]
-    down_r = [1, 1]
+    up_r = [-1, 1],
+    up_l = [-1, -1],
+    down_r = [1, 1],
     down_l = [1, -1]
   ]
 
@@ -28,8 +28,8 @@ module Slideable
 
   def moves
     all_moves = []
-    move_dirs.each do |dir|
-      all_moves.concat(grow_unblocked_moves_in_dir(*dir))
+    move_dirs.each do |dx, dy|
+      all_moves.concat(grow_unblocked_moves_in_dir(dx, dy))
     end
     all_moves
   end

@@ -1,4 +1,5 @@
 require 'singleton'
+require_relative 'piece'
 
 class NullPiece < Piece
 
@@ -11,7 +12,11 @@ class NullPiece < Piece
   end
 
   def symbol
-    puts ' '
+    self.color
+  end
+
+  def inspect
+    self.symbol
   end
 
 end

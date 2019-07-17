@@ -6,8 +6,9 @@ class Piece
 
   def initialize(color, board, pos)
     @color = color
-    @board  = board
-    @pos = board[pos]
+    @board = board
+    @pos = pos
+    # board[pos]
   end
 
   def moves
@@ -19,11 +20,15 @@ class Piece
   end
 
   def to_s
-    self.symbol
+    self.symbol.to_s
   end
 
   def empty?
   
+  end
+
+  def inspect
+    self.symbol
   end
 
 end
