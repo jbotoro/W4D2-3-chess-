@@ -1,20 +1,3 @@
-module Slideable
-
-end
-
-module Stepable
-
-  def moves
-  end
-
-  private
-
-  def move_diffs
-
-  end
-  
-end
-
 class Piece
   attr_reader :color, :board
   attr_accessor :pos
