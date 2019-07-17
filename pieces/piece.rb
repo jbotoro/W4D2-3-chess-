@@ -16,7 +16,7 @@ class Piece
   end
 
   def symbol
-    puts "#{color} #{self.class.name}"
+    "#{color} #{self.class.name}"
   end
 
   def to_s
