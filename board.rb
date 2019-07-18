@@ -102,7 +102,7 @@ class Board
 
   def render
     system "clear"
-    @rows.each { |row| p row }
+    rows.each { |row| p row }
   end
 
 end
